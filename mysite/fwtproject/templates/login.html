@@ -1,0 +1,33 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <link rel="stylesheet" href="{% static 'css/authstyle.css' %}">
+  </head>
+  <body>
+<div class="login-box">
+  <h1>Travel Adventure</h1>
+  <h2>Login</h2>
+  {% if error %}
+  <h3>{{error}}</h3>
+  {% endif %}
+<form method="POST" action = "{% url 'login' %}">
+    {% csrf_token %}
+  <div class="textbox">
+    <i class="fas fa-user"></i>
+    <input type="email" placeholder="Email" name="email">
+  </div>
+
+  <div class="textbox">
+    <i class="fas fa-lock"></i>
+    <input type="password" placeholder="Password" name="password">
+  </div>
+
+  <button type="submit" class="btn" value="Login">Login</button>
+</form>
+  <input type="button" class="btn" value="Sign Up" onclick="window.location.href = 'signup';"/>
+</div>
+  </body>
+</html>

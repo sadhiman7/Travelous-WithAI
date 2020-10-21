@@ -1,0 +1,124 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+	{% block body %}
+
+
+<!--================Home Banner Area =================-->
+	<section class="banner_area ">
+		<div class="banner_inner overlay d-flex align-items-center">
+			<div class="container">
+				<div class="banner_content">
+					<div class="page_link">
+						<a href="index.html">Home</a>
+						<a href="packages.html">Packages</a>
+					</div>
+					<h2>Trip Packages</h2>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!--================End Home Banner Area =================-->
+
+
+<section class="package-area section_gap_top">
+	<div class="container">
+	{% if tour %}<h1>Tours Matching Your Search</h1>{% endif %}
+	<div class="row">
+
+
+
+
+{% for i in tour %}
+
+
+				<div class="col-lg-4 col-md-6">
+					<div class="single-package">
+						<div class="thumb">
+							<img class="img-fluid" src="/static/{{i.image}}" alt="">
+						</div>
+						<p class="date"><span>Rs</span> <br>{{i.price}}</p>
+						<div class="meta-top d-flex">
+							<p><span class="fa fa-location-arrow"></span>{{i.state}}</p>
+							<p class="ml-20"><span class="fa fa-calendar"></span>{{i.dn}}</p>
+						</div>
+						<h4>{{i.destination}}</h4>
+						<p>
+							{{i.sdesc}}
+						</p>
+						<a href="/tours/{{i.id}}" class="primary-btn">Book Now</a>
+					</div>
+				</div>
+
+{% if forloop.counter|divisibleby:"3"  and forloop.counter > 0 and not forloop.last%}
+
+	</div>
+	<div class="row">
+
+{% endif %}
+
+		{% empty %}
+
+		<h1>Sorry, we could not find any tours matching your search!</h1>
+
+
+{% endfor %}
+	</div></div>
+	</section>
+
+		<section class="package-area section_gap_top">
+	<div class="container">
+	{% if tour %}<h1>Similar Tours</h1>{% endif %}
+	<div class="row">
+
+
+
+
+		{% for i in stour %}
+
+
+				<div class="col-lg-4 col-md-6">
+					<div class="single-package">
+						<div class="thumb">
+							<img class="img-fluid" src="/static/{{i.image}}" alt="">
+						</div>
+						<p class="date"><span>Rs</span> <br>{{i.price}}</p>
+						<div class="meta-top d-flex">
+							<p><span class="fa fa-location-arrow"></span>{{i.state}}</p>
+							<p class="ml-20"><span class="fa fa-calendar"></span>{{i.dn}}</p>
+						</div>
+						<h4>{{i.destination}}</h4>
+						<p>
+							{{i.sdesc}}
+						</p>
+						<a href="/tours/{{i.id}}" class="primary-btn">Book Now</a>
+					</div>
+				</div>
+
+{% if forloop.counter|divisibleby:"3"  and forloop.counter > 0 and not forloop.last%}
+
+	</div>
+	<div class="row">
+
+{% endif %}
+
+		{% empty %}
+
+		<h1>Sorry, we could not find any tours matching your search!</h1>
+
+
+{% endfor %}
+
+
+
+
+	</div>
+</div>
+</section>
+
+
+
+
+
+{% endblock %}

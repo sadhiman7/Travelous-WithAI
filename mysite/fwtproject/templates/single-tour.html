@@ -1,0 +1,209 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+	{% block body %}
+
+<!--================Home Banner Area =================-->
+	<section class="banner_area ">
+		<div class="banner_inner overlay d-flex align-items-center">
+			<div class="container">
+				<div class="banner_content">
+					<div class="page_link">
+						<a href="index.html">Home</a>
+						<a href="packages.html">Tours</a>
+					</div>
+					<h2>{{tour.state}}</h2>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!--================End Home Banner Area =================-->
+
+
+<br><br>
+
+
+<section class="team_area">
+		<div class="container">
+			<div class="row d-flex justify-content-center">
+				<div class="col-lg-12">
+					<div class="main_title">
+						<p>Experience the amazing land of</p>
+						<h1>{{tour.destination}}</h1>
+						<span class="title-widget-bg"></span>
+					</div>
+				</div>
+			</div>
+			<div class="row team_inner justify-content-center">
+				<div class="col-lg-12 col-md-12">
+					<div class="team_item">
+						<div class="team_img">
+							<!--Carousel Wrapper-->
+							<div id="video-carousel-example" class="carousel slide carousel-fade justify-content-center" data-ride="carousel">
+							  <!--Indicators-->
+							  <ol class="carousel-indicators">
+								<li data-target="#video-carousel-example" data-slide-to="0" class="active"></li>
+								<li data-target="#video-carousel-example" data-slide-to="1"></li>
+								<li data-target="#video-carousel-example" data-slide-to="2"></li>
+							  </ol>
+							  <!--/.Indicators-->
+							  <!--Slides-->
+							  <div class="carousel-inner" role="listbox">
+								<div class="carousel-item active">
+								  <video class="video-fluid" autoplay loop muted>
+									<source src="https://mdbootstrap.com/img/video/Tropical.mp4" type="video/mp4" />
+								  </video>
+								</div>
+								<div class="carousel-item">
+								  <video class="video-fluid" autoplay loop muted>
+									<source src="https://mdbootstrap.com/img/video/forest.mp4" type="video/mp4" />
+								  </video>
+								</div>
+								<div class="carousel-item">
+								  <video class="video-fluid" autoplay loop muted>
+									<source src="https://mdbootstrap.com/img/video/Agua-natural.mp4" type="video/mp4" />
+								  </video>
+								</div>
+							  </div>
+							  <!--/.Slides-->
+							  <!--Controls-->
+							  <a class="carousel-control-prev" href="#video-carousel-example" role="button" data-slide="prev">
+								<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+								<span class="sr-only">Previous</span>
+							  </a>
+							  <a class="carousel-control-next" href="#video-carousel-example" role="button" data-slide="next">
+								<span class="carousel-control-next-icon" aria-hidden="true"></span>
+								<span class="sr-only">Next</span>
+							  </a>
+							  <!--/.Controls-->
+							</div>
+							<!--Carousel Wrapper-->
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+
+
+
+
+<div class="container">
+	<div class="team_item">
+		<h2>About</h2>
+		<br>
+		<p>{{tour.about}}</p>
+		<br>
+		<h2>Places to Visit</h2>
+		<br>
+			{% for i in ptv|slice:"0:" %}
+				  <h4>{{i.name}}</h4>
+				  <p>{{i.desc}}</p>
+					<br>
+			{% endfor %}
+		<h2>How to Reach</h2>
+		<br>
+			{% for i in htr|slice:"0:" %}
+				  <h4>{{i.via}}</h4>
+				  <p>{{i.desc}}</p>
+			{% endfor %}
+	</div>
+</div>
+
+
+
+
+<div class="container">
+		<a type="button" class="btn btn-primary btn-lg btn-block" href='book/{{tour.id}}' >BOOK NOW</a>
+</div>
+
+<br>
+
+
+<div class="container">
+<div id="googleMap" style="width:100%;height:400px;"></div>
+</div>
+
+<br>
+
+
+<section class="package-area section_gap_top">
+	<div class="container">
+	{% if tour %}<h1>Similar Tours</h1>{% endif %}
+	<div class="row">
+
+
+
+
+		{% for i in stour %}
+
+
+				<div class="col-lg-4 col-md-6">
+					<div class="single-package">
+						<div class="thumb">
+							<img class="img-fluid" src="/static/{{i.image}}" alt="">
+						</div>
+						<p class="date"><span>Rs</span> <br>{{i.price}}</p>
+						<div class="meta-top d-flex">
+							<p><span class="fa fa-location-arrow"></span>{{i.state}}</p>
+							<p class="ml-20"><span class="fa fa-calendar"></span>{{i.dn}}</p>
+						</div>
+						<h4>{{i.destination}}</h4>
+						<p>
+							{{i.sdesc}}
+						</p>
+						<a href="/tours/{{i.id}}" class="primary-btn">Book Now</a>
+					</div>
+				</div>
+
+{% if forloop.counter|divisibleby:"3"  and forloop.counter > 0 and not forloop.last%}
+
+	</div>
+	<div class="row">
+
+{% endif %}
+
+		{% empty %}
+
+		<h1>Sorry, we could not find any tours matching your search!</h1>
+
+
+{% endfor %}
+
+
+
+
+	</div>
+</div>
+</section>
+
+<script>
+function myMap() {
+var mapProp= {
+  center:new google.maps.LatLng(23.025242,72.508859),
+  zoom:20,
+};
+var map = new google.maps.Map(document.getElementById("googleMap"),mapProp);
+
+var marker = new google.maps.Marker({
+    position: new google.maps.LatLng(23.025242,72.508859),
+    map: map,
+    title: 'Hello World!'
+  });
+
+var marker = new google.maps.Marker({
+    position: new google.maps.LatLng(23.026990, 72.508795),
+    map: map,
+    title: 'Hello World!'
+  });
+
+
+}
+</script>
+
+
+
+
+{% endblock %}

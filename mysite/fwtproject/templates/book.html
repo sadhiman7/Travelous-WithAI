@@ -1,0 +1,145 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+	{% block body %}
+
+<script type="text/javascript" src="{% static 'js/datepicker.js' %}"></script>
+<link rel="stylesheet" href="{% static 'css/datepicker.css' %}" type="text/css"/>
+
+<script>
+			$(function() {
+			$('.dates #usr1').datepicker({
+				'format': 'yyyy-mm-dd',
+				'autoclose': true
+			});
+		});
+			</script>
+
+
+
+
+
+<!--================Home Banner Area =================-->
+	<section class="banner_area ">
+		<div class="banner_inner overlay d-flex align-items-center">
+			<div class="container">
+				<div class="banner_content">
+					<div class="page_link">
+						<a href="index.html">Home</a>
+						<a href="packages.html">Tours</a>
+						<a href="packages.html">Book</a>
+					</div>
+					<h2>{{tour.state}}</h2>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!--================End Home Banner Area =================-->
+
+<br>
+
+<div class="container">
+	<div class="row justify-content-center">
+	<h1>Confirm your Booking</h1>
+</div>
+</div>
+
+<br>
+
+<div class="container">
+	<div class="team_item">
+<br>
+		<div class="row">
+			<div class="col-sm">
+				<h3>Name</h3>
+			</div>
+			<div class="col-sm">
+			  <p class="lead">{{user.first_name}} {{user.last_name}}</p>
+			</div>
+		</div>
+<br>
+		<div class="row">
+			<div class="col-sm">
+				<h3>Email</h3>
+			</div>
+			<div class="col-sm">
+			  <p class="lead">{{user.email}}</p>
+			</div>
+		</div>
+<br>
+		<div class="row">
+			<div class="col-sm">
+				<h3>Tour</h3>
+			</div>
+			<div class="col-sm">
+			  <p class="lead">{{tour.destination}}</p>
+			</div>
+		</div>
+		<br>
+
+		<form method="POST" action = "{{tour.id}}">
+    {% csrf_token %}
+
+		<div class="row">
+			<div class="col-sm">
+				<h3>Date</h3>
+			</div>
+			<div class="col-sm">
+			  <input type="date" class="" name="bookingdate" required>
+			</div>
+		</div>
+<br>
+			<div class="row">
+			<div class="col-sm">
+				<h3>Number of Adults</h3>
+			</div>
+			<div class="col-sm">
+			 	 <select class="form-control" name="na">
+  					<option>1</option>
+					 <option>2</option>
+					 <option>3</option>
+					 <option>4</option>
+					 <option>5</option>
+					 <option>6</option>
+				</select>
+			</div>
+
+		</div>
+
+<br>
+
+		<div class="row">
+			<div class="col-sm">
+				<h3>Number of Children</h3>
+			</div>
+			<div class="col-sm">
+			 	 <select class="form-control" name="nc">
+					 <option>0</option>
+  					<option>1</option>
+					 <option>2</option>
+					 <option>3</option>
+					 <option>4</option>
+					 <option>5</option>
+					 <option>6</option>
+				</select>
+			</div>
+		</div>
+<br>
+		</div>
+
+
+
+
+
+	</div>
+
+
+
+<div class="container">
+		<button type="submit" class="btn btn-primary btn-lg btn-block">Proceed to Payment</button>
+</div>
+</form>
+<br>
+<br>
+{% endblock %}

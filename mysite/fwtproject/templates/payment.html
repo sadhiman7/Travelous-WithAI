@@ -1,0 +1,55 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <link rel="stylesheet" href="{% static 'css/paystyle.css' %}">
+
+      <script>
+          $(function(){
+    $('[type="month"].min-today').prop('min', function(){
+        return new Date().toJSON().split('T')[0];
+    });
+});
+      </script>
+
+
+
+  </head>
+  <body>
+<div class="login-box">
+  <h1>Payment</h1><br><br><br><br><br><br>
+  <h2>Rs. {{price}}</h2>
+  {% if error %}
+    <h3>{{ error }}</h3>
+  {% endif %}
+  <form method="POST" action = "{% url 'orders' %}">
+    {% csrf_token %}
+  <div class="textbox">
+    <i class="fas fa-credit-card"></i>
+    <input type="text" placeholder="Card Number" name="fname" pattern="[0-9]{16}" required>
+  </div>
+  <div class="textbox">
+    <i class="fas fa-user"></i>
+    <input type="text" placeholder="Full Name" name="lname" required>
+  </div>
+  <div class="textbox">
+    <i class="fas fa-calendar"></i>
+    <input type="month" id="start" name="start"
+       min="2020-04" value="2100-05">
+
+  </div>
+
+  <div class="textbox">
+    <i class="fas fa-lock"></i>
+    <input type="password" placeholder="CVV" name="password" pattern="[0-9]{3}" required>
+  </div>
+
+    <button type="submit" class="btn" value="Register"> Pay </button>
+
+  </form>
+
+</div>
+  </body>
+</html>

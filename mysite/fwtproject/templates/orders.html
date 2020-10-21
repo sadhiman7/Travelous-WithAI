@@ -1,0 +1,80 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+	{% block body %}
+
+
+
+	<section class="banner_area ">
+		<div class="banner_inner overlay d-flex align-items-center">
+			<div class="container">
+				<div class="banner_content">
+					<div class="page_link">
+						<a href="index.html">Home</a>
+						<a href="packages.html">Bookings</a>
+					</div>
+					<h2>My Bookings</h2>
+				</div>
+			</div>
+		</div>
+	</section>
+
+<br>
+
+
+<div class = "container">
+
+{% for i in bookings %}
+
+    <div class = "team_item">
+        <div class="row">
+            <div class="col-lg-3">
+                <h3>Destination</h3>
+            </div>
+            <div class="col-lg-9">
+                <p class="lead">{{i.destination}}</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-3">
+                <h3>Date</h3>
+            </div>
+            <div class="col-lg-9">
+                <p class="lead">{{i.bookingdate}}</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-3">
+                <h3>No of Adults</h3>
+            </div>
+            <div class="col-lg-9">
+                <p class="lead">{{i.adults}}</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-3">
+                <h3>No of Children</h3>
+            </div>
+            <div class="col-lg-9">
+                <p class="lead">{{i.children}}</p>
+            </div>
+        </div>
+
+    </div>
+
+    {% empty %}
+<br>
+    <div class="container">
+        <h2>You currently have no bookings</h2>
+    </div>
+    <br>
+<br>
+{% endfor %}
+
+</div>
+
+
+
+
+{% endblock %}
